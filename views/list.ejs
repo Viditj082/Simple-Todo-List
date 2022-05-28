@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        *{
+            margin: 0;padding: 0;box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg,#8E2DE2,#4A00E0);
+            font-family: sans-serif;
+            color:white
+        }
+
+        .date-card{
+            border-radius: 1rem ;
+            padding:1rem;
+            border:1px solid whitesmoke;
+            position: fixed;
+            top: -10px;
+            color: #E9F23D;
+            text-shadow: 1px 1px 1px #000000;
+            text-shadow: 2px;
+            background: #00000010;
+            backdrop-filter: blur(5px);
+        }
+        
+        ul{
+            margin:20px 0 0 0;
+            list-style: none;
+            width:280px;
+            max-height: 300px;
+            overflow-y: scroll;
+            border:1px solid black;
+            border-top:none;
+            border-bottom: none;
+        }
+
+
+        ul::-webkit-scrollbar-track {
+  
+  padding: 2px 0;
+ 
+}
+ul::-webkit-scrollbar {
+  width: 0px;
+}
+
+    h1{
+        margin-bottom: 50px;
+    }
+
+        .list-items
+        {
+            border:1px solid black;  
+            min-height:60px;
+            padding:0.3rem;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            overflow-x: hidden;
+            transition: 0.2s;
+
+        }
+        li:hover{
+            background-color: #E9F23D99;
+            color:black
+        }
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            justify-content:space-evenly;
+            align-items: center;
+            height: 60%;
+            
+        }
+        input{
+            border-radius: 1rem;
+            padding:0.7rem;
+            border:none;
+            box-shadow: 1px 1px 2px black;
+        }
+        
+        button{
+            margin-left: 10px;
+            padding:0.3rem;
+            background-color: transparent;
+            color:white;
+            transition: 0.2s;
+            border:1px solid #E9F23D
+        }
+        button:hover{
+            background: #00000050;
+        }
+        form{
+            margin:50px 0
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="date-card">
+        <h2><%= date %></h2>
+    </div>
+
+    <div class="content">
+
+    <h1>ToDo List</h1>
+
+    <form action="/" method="post">
+
+        <input type="text" placeholder="Type a todo.." name="task">
+        
+        <button type="submit">Add to list</button>
+    
+    </form>
+
+    <ul>
+        <% for(let i=0;i<newlist.length;i++) {  %>
+
+            <li class="list-items"><%= newlist[i] %></li>
+             <%  } %>
+    </ul>
+
+    </div>
+  
+    
+</body>
+</html>
