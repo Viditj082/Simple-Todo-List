@@ -57,6 +57,11 @@ app.get('/delete/:id',(req,res)=>{
 
 })
 
+app.get('/pop',(req,res)=>{
+    listitems.pop();
+    res.redirect('/')
+})
+
 app.listen(process.env.PORT||9000,()=>{
 
 
