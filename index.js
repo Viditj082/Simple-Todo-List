@@ -7,7 +7,9 @@ const app=express()
 
 const bodyparser=require('body-parser')
 
-const ejs=require('ejs')
+const ejs=require('ejs');
+const { redirect } = require('express/lib/response');
+const req = require('express/lib/request');
 
 
 app.set('view engine', 'ejs');
@@ -32,6 +34,25 @@ app.post('/',(req,res)=>{
     
     if(req.body.task!='')
     listitems.push(req.body.task)
+    res.redirect('/')
+
+})
+
+
+app.get('/deleteall',(req,res)=>{
+    listitems=[];
+    res.redirect('/')
+})
+app.get('/delete/:id',(req,res)=>{
+
+    let n=req.params.id
+
+    for(let i=n-1;i<listitems.length-1;i++)
+    {
+        listitems[i]=listitems[i+1];
+    }
+    listitems.pop();
+
     res.redirect('/')
 
 })
