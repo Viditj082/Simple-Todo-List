@@ -31,9 +31,8 @@ app.get('/',(req,res)=>{
 app.post('/',(req,res)=>{
     
     if(req.body.task!='')
-  {  listitems.push(req.body.task)
+    listitems.push(req.body.task)
     res.redirect('/')
-}
 
 })
 
