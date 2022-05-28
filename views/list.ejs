@@ -17,9 +17,11 @@
             height: 100vh;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(45deg,#8E2DE2,#4A00E0);
+            background: linear-gradient(45deg,#8E2DE2,#4A00E0,#ad5389,#3c1053,#4e54c8,#8f94fb);
+            background-size: 600% 600%;
             font-family: sans-serif;
-            color:white
+            color:white;
+            animation: gradient 90s ease infinite;
         }
 
         .date-card{
@@ -106,6 +108,19 @@ ul::-webkit-scrollbar {
         form{
             margin:50px 0
         }
+
+        @keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
     </style>
 </head>
