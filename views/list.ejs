@@ -64,9 +64,12 @@ ul::-webkit-scrollbar {
 
         .list-items
         {
-            border:1px solid black;  
+            width: 100%;
+            border:1px solid black;
+            border-left: none;
+            border-right: none;  
             min-height:60px;
-            padding:0.3rem;
+            padding:0 0.3rem 0 0.3rem;
             display: flex;
             justify-content:center;
             align-items: center;
@@ -77,6 +80,20 @@ ul::-webkit-scrollbar {
         li:hover{
             background-color: #E9F23D99;
             color:black
+        }
+
+        li>div{
+            width:100%;
+            display:grid;
+            grid-template-columns: 2fr 6fr;
+        }
+        li>div>input{
+            margin:0 0 0 10px
+        }
+
+        input:checked~p{
+            text-decoration: line-through;
+            color:rgb(130, 255, 130)
         }
 
         .content{
@@ -137,7 +154,7 @@ ul::-webkit-scrollbar {
     <ul>
         <% for(let i=0;i<newlist.length;i++) {  %>
 
-            <li class="list-items"><%= newlist[i] %></li>
+            <li class="list-items"><div ><input type="checkbox"><p><%= newlist[i] %></p></div></li>
              <%  } %>
     </ul>
 
