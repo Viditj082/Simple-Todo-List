@@ -97,6 +97,10 @@ ul::-webkit-scrollbar {
             color:rgb(130, 255, 130)
         }
 
+        input:checked{
+            background: green;
+        }
+
         .content{
             display: flex;
             flex-direction: column;
@@ -155,7 +159,7 @@ ul::-webkit-scrollbar {
     <ul>
         <% for(let i=0;i<newlist.length;i++) {  %>
 
-            <li class="list-items"><div ><input type="checkbox"><p><%= newlist[i] %></p></div></li>
+            <li class="list-items"><div ><input type="checkbox"><p style="transition:0.2s"><%= newlist[i] %></p></div></li>
              <%  } %>
     </ul>
 
