@@ -156,12 +156,19 @@ ul::-webkit-scrollbar {
     
     </form>
 
+    <form action="/delete" method="post">
     <ul>
         <% for(let i=0;i<newlist.length;i++) {  %>
 
-            <li class="list-items"><div ><input type="checkbox"><p style="transition:0.2s"><%= newlist[i] %></p></div></li>
+                                                                                                                    
+            <li class="list-items"><div ><input type="checkbox" value="<%=newlist[i]._id%>" name="checkbox" onchange="this.form.submit()" ><p style="transition:0.2s"><%= newlist[i].listitem %></p></div></li>
+                                                                                                                      <!-- Submit form -->
              <%  } %>
+
+        
     </ul>
+
+</form>
 
     </div>
   

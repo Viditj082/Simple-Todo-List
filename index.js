@@ -3,12 +3,37 @@
 const express=require('express')
 
 
+const mongoose=require('mongoose')
+
+mongoose.connect('mongodb+srv://vidit082:9039915909@cluster0.cfrgu.mongodb.net/list',(err)=>{
+    if(err)
+    console.log(err)
+    else
+    console.log('Mongo connected !!')
+})
+
+const ListSchema=new mongoose.Schema(
+    {
+        listitem:{
+            type:String,
+            
+        }
+    }
+)
+
+
+
+const ListItem=mongoose.model('Item',ListSchema)
+
+
 const app=express()
 
 const bodyparser=require('body-parser')
 
 const ejs=require('ejs');
+
 const { redirect } = require('express/lib/response');
+
 const req = require('express/lib/request');
 
 
@@ -20,10 +45,17 @@ app.use(bodyparser.urlencoded({extended:true}))
 
 var listitems=[]
 
+
+
+
 // Get
 app.get('/',(req,res)=>{
+    
+    listitems=[]
 
-    res.render('list',{date:getLocaleDate(),newlist:listitems})
+    getlistItems()
+
+    setTimeout(()=>{ res.render('list',{date:getLocaleDate(),newlist:listitems})},2400)
 
 })
 
@@ -33,34 +65,38 @@ app.get('/',(req,res)=>{
 app.post('/',(req,res)=>{
     
     if(req.body.task!='')
-    listitems.push(req.body.task)
+    addToDb(req.body.task)
+    
     res.redirect('/')
 
 })
 
 
 app.get('/deleteall',(req,res)=>{
+
+    ListItem.deleteMany({})
     listitems=[];
     res.redirect('/')
 })
-app.get('/delete/:id',(req,res)=>{
 
-    let n=req.params.id
+app.post('/delete',(req,res)=>{
+    
+    
+  const checkedId= req.body.checkbox
 
-    for(let i=n-1;i<listitems.length-1;i++)
-    {
-        listitems[i]=listitems[i+1];
-    }
-    listitems.pop();
+  ListItem.findByIdAndRemove(checkedId,(err)=>{
+      if(!err)
+      console.log('Deleted checked Item !!')
+      else
+      console.log(err)
 
-    res.redirect('/')
+      res.redirect('/')
+  })
 
 })
 
-app.get('/pop',(req,res)=>{
-    listitems.pop();
-    res.redirect('/')
-})
+
+
 
 app.listen(process.env.PORT||9000,()=>{
 
@@ -82,3 +118,27 @@ const d = new Date();
  
 return d.getDate()+'th ' +monthNames[d.getMonth()] +", "+days[d.getDay()]
 }
+
+
+
+
+function addToDb(item){
+
+    let l1=new ListItem({
+        listitem:item})
+    
+        l1.save()
+}
+
+function getlistItems(){
+    
+    ListItem.find((err,rows)=>{
+
+       listitems=rows
+       console.log(rows)
+    })
+    
+    listitems.reverse()
+}
+
+
