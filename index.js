@@ -135,7 +135,7 @@ function getlistItems(){
     ListItem.find((err,rows)=>{
 
        listitems=rows
-       console.log(rows)
+      
     })
     
     listitems.reverse()
